@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol PostsViewModelCoodinatorDelegate: AnyObject {
+    func presentPost(for id: String)
+}
+
 protocol PostsViewModelDelegate: AnyObject {
     func didReceivePosts(_ posts: [Post])
     func didThrowError(_ error: Error)
@@ -16,6 +20,7 @@ protocol PostsViewModelDelegate: AnyObject {
 final class PostsViewModel {
     
     weak var delegate: PostsViewModelDelegate?
+    weak var coordinatorDelegate: PostsViewModelCoodinatorDelegate?
     let postRepository: PostRepositoryProtocol
     
     init(repository: PostRepositoryProtocol) {
@@ -33,5 +38,9 @@ final class PostsViewModel {
                 }
             }
         }
+    }
+    
+    func presentPostDetail(for id: String) {
+        coordinatorDelegate?.presentPost(for: id)
     }
 }

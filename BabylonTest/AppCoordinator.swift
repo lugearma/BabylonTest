@@ -8,25 +8,44 @@
 
 import UIKit
 
-protocol Coordinator {
+enum Coodinator {
+    case posts
+}
+
+protocol CoordinatorProtocol {
     func start()
 }
 
-final class AppCoordinator: Coordinator {
+final class AppCoordinator: CoordinatorProtocol {
     
     let window: UIWindow
-    let apiClient: APIClietProtocol
+    let apiClient: APIClientProtocol
+    var coordinators: [Coodinator : CoordinatorProtocol] = [:]
+    let navigationController = UINavigationController()
     
-    init(window: UIWindow, apiClient: APIClietProtocol) {
+    init(window: UIWindow, apiClient: APIClientProtocol) {
         self.window = window
         self.apiClient = apiClient
     }
     
     func start() {
-        let postRespository = PostRepository(apiClient: apiClient)
-        let viewModel = PostsViewModel(repository: postRespository)
-        let postsViewController = PostsViewController(viewModel: viewModel)
-        window.rootViewController = postsViewController
-        window.makeKeyAndVisible()
+        startPosts()
+        window.rootViewController = navigationController
+    }
+}
+
+// MARK: - PostsCoordinatorDelegate
+
+extension AppCoordinator: PostsCoordinatorDelegate {
+    
+    func presentPost(for id: String) {
+        
+    }
+    
+    private func startPosts() {
+        let postsCoordinator = PostsCoordinator(navigationController: navigationController, apiClient: apiClient)
+        postsCoordinator.delegate = self
+        coordinators[.posts] = postsCoordinator
+        postsCoordinator.start()
     }
 }

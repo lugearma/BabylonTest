@@ -26,9 +26,9 @@ final class PostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
         viewModel.fetchPosts()
         setupTableView()
+        title = "Posts"
     }
     
     private func setupTableView() {
@@ -81,7 +81,6 @@ extension PostsViewController: PostsViewModelDelegate {
     func didReceivePosts(_ posts: [Post]) {
         self.posts = posts
         postsTableView.reloadSections([0], with: .automatic)
-        print("✅", posts)
     }
     
     func didThrowError(_ error: Error) {

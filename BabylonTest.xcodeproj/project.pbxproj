@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6FE8AAFF22BFFDA400360CEA /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8AAFE22BFFDA400360CEA /* PostCoordinator.swift */; };
+		6FE8AB0422C035FE00360CEA /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8AB0322C035FE00360CEA /* PostDetailViewController.swift */; };
+		6FE8AB0622C03CFA00360CEA /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8AB0522C03CFA00360CEA /* PostDetailViewModel.swift */; };
+		6FE8AB0822C03F4800360CEA /* PostDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8AB0722C03F4800360CEA /* PostDetailCoordinator.swift */; };
 		9230B2C222B4BC1D00BDC7EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230B2C122B4BC1D00BDC7EC /* AppDelegate.swift */; };
 		9230B2CA22B4BC1D00BDC7EC /* BabylonTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9230B2C822B4BC1D00BDC7EC /* BabylonTest.xcdatamodeld */; };
 		9230B2CC22B4BC1E00BDC7EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9230B2CB22B4BC1E00BDC7EC /* Assets.xcassets */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6FE8AAFE22BFFDA400360CEA /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
+		6FE8AB0322C035FE00360CEA /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		6FE8AB0522C03CFA00360CEA /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
+		6FE8AB0722C03F4800360CEA /* PostDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailCoordinator.swift; sourceTree = "<group>"; };
 		9230B2BE22B4BC1D00BDC7EC /* BabylonTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabylonTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9230B2C122B4BC1D00BDC7EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9230B2C922B4BC1D00BDC7EC /* BabylonTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BabylonTest.xcdatamodel; sourceTree = "<group>"; };
@@ -76,6 +84,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6FE8AB0222C035DD00360CEA /* PostDetail */ = {
+			isa = PBXGroup;
+			children = (
+				6FE8AB0322C035FE00360CEA /* PostDetailViewController.swift */,
+				6FE8AB0522C03CFA00360CEA /* PostDetailViewModel.swift */,
+				6FE8AB0722C03F4800360CEA /* PostDetailCoordinator.swift */,
+			);
+			path = PostDetail;
+			sourceTree = "<group>";
+		};
 		9230B2B522B4BC1D00BDC7EC = {
 			isa = PBXGroup;
 			children = (
@@ -138,18 +156,11 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		923AEC0722BFC2680040E7F2 /* PostDetail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PostDetail;
-			sourceTree = "<group>";
-		};
 		92AF9BE122B94EAC0036C019 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				92AF9BE322B94EFE0036C019 /* Posts */,
-				923AEC0722BFC2680040E7F2 /* PostDetail */,
+				6FE8AB0222C035DD00360CEA /* PostDetail */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -170,6 +181,7 @@
 				92AF9BE422B94FCA0036C019 /* PostsViewController.swift */,
 				92AF9BE622B94FF50036C019 /* PostsViewModel.swift */,
 				923AEC0822BFC5650040E7F2 /* PostCell.swift */,
+				6FE8AAFE22BFFDA400360CEA /* PostCoordinator.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -281,11 +293,15 @@
 				923AEBFE22BEBA240040E7F2 /* Company.swift in Sources */,
 				923AEC0022BEBE4A0040E7F2 /* APIClient.swift in Sources */,
 				92AF9BE922B951910036C019 /* AppCoordinator.swift in Sources */,
+				6FE8AB0422C035FE00360CEA /* PostDetailViewController.swift in Sources */,
 				923AEBF822BEB8D40040E7F2 /* Post.swift in Sources */,
+				6FE8AB0622C03CFA00360CEA /* PostDetailViewModel.swift in Sources */,
 				9230B2C222B4BC1D00BDC7EC /* AppDelegate.swift in Sources */,
 				923AEC0222BFB80D0040E7F2 /* APIRouter.swift in Sources */,
+				6FE8AAFF22BFFDA400360CEA /* PostCoordinator.swift in Sources */,
 				9230B2CA22B4BC1D00BDC7EC /* BabylonTest.xcdatamodeld in Sources */,
 				923AEBFC22BEB92D0040E7F2 /* Address.swift in Sources */,
+				6FE8AB0822C03F4800360CEA /* PostDetailCoordinator.swift in Sources */,
 				923AEBFA22BEB90C0040E7F2 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

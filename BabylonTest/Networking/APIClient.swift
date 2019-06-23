@@ -19,16 +19,22 @@ enum APIClientError: Error {
     case missingData
 }
 
-protocol APIClietProtocol {
+protocol APIClientProtocol {
     func posts(completion: @escaping PostsResult)
+    func postBy(id: String, completion: @escaping PostResult)
 }
 
 typealias PostsResult = (Result<[Post], Error>) -> Void
+typealias PostResult = (Result<Post, Error>) -> Void
 
-class APIClient: APIClietProtocol {
+class APIClient: APIClientProtocol {
     
     func posts(completion: @escaping PostsResult) {
         requestData(requestType: .get, router: .posts, completion: completion)
+    }
+    
+    func postBy(id: String, completion: @escaping PostResult) {
+        requestData(requestType: .get, router: .postBy(id: id), completion: completion)
     }
 }
 

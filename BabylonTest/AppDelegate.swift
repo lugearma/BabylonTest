@@ -13,7 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var coordinator: Coordinator?
+    var coordinator: CoordinatorProtocol?
     let apiClient = APIClient()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let window = window else { preconditionFailure("Unexpected failure, invalid value for window  ") }
         coordinator = AppCoordinator(window: window, apiClient: apiClient)
         coordinator?.start()
+        window.makeKeyAndVisible()
         return true
     }
 
