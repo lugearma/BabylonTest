@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabylonTest/UI/AllPosts/AllPostsViewModel.swift"
+            timestampString = "582992339.096941"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "fetchPosts()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;BabylonTest.Post&gt;, Swift.Error&gt;) -&gt; () in BabylonTest.AllPostsViewModel.fetchPosts() -&gt; ()"
+                  moduleName = "BabylonTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luisarias/Documents/Development/Interviews/BabylonTest/BabylonTest/UI/AllPosts/AllPostsViewModel.swift"
+                  timestampString = "582992264.209412"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;BabylonTest.Post&gt;, Swift.Error&gt;) -&gt; () in BabylonTest.AllPostsViewModel.fetchPosts() -&gt; ()"
+                  moduleName = "BabylonTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luisarias/Documents/Development/Interviews/BabylonTest/BabylonTest/UI/AllPosts/AllPostsViewModel.swift"
+                  timestampString = "582992264.213114"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "207">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabylonTest/UI/AllPosts/AllPostsViewController.swift"
+            timestampString = "582992339.097025"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -13,10 +13,14 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var coordinator: Coordinator?
+    let apiClient = APIClient()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        guard let window = window else { preconditionFailure("Unexpected failure, invalid value for window  ") }
+        coordinator = AppCoordinator(window: window, apiClient: apiClient)
+        coordinator?.start()
         return true
     }
 
