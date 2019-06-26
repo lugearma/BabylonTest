@@ -29,27 +29,28 @@ class PostDetailViewModel {
         self.userRepository = repository
         self.commentRepository = commentRepository
         self.post = post
+    }
+    
+    func fetchPostDetails() {
         fetchUser()
         fetchCommments()
         postDetailGroup.notify(queue: .main, execute: fetchCompleted)
     }
     
-    func fetchUser() {
+    private func fetchUser() {
         postDetailGroup.enter()
         userRepository.userBy(id: post.userId) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let user):
-                    self.user = user
-                case .failure(let error):
-                    self.delegate?.didThrow(error: error)
-                }
-                self.postDetailGroup.leave()
+            switch result {
+            case .success(let user):
+                self.user = user
+            case .failure(let error):
+                self.delegate?.didThrow(error: error)
             }
+            self.postDetailGroup.leave()
         }
     }
     
-    func fetchCommments() {
+    private func fetchCommments() {
         postDetailGroup.enter()
         commentRepository.commentsBy(postId: post.id) { result in
             switch result {
@@ -62,7 +63,7 @@ class PostDetailViewModel {
         }
     }
     
-    func fetchCompleted() {
+    private func fetchCompleted() {
         guard let user = user else {
             // TODO: Notify error to delegate
             return

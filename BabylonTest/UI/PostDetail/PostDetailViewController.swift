@@ -35,9 +35,9 @@ final class PostDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchUser()
         view.backgroundColor = .white
         title = "Post detail"
+        viewModel.fetchPostDetails()
         activityIndicator.startAnimating()
     }
     
@@ -57,6 +57,7 @@ final class PostDetailViewController: UIViewController {
 // MARK: - PostDetailViewModelDelegate
 
 extension PostDetailViewController: PostDetailViewModelDelegate {
+    
     func didReceivePostDetail(postDetail: PostDetail) {
         activityIndicator.stopAnimating()
         setupPostDetailView(postDetail)
