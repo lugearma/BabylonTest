@@ -13,7 +13,6 @@
 		6FE8AB0822C03F4800360CEA /* PostDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8AB0722C03F4800360CEA /* PostDetailCoordinator.swift */; };
 		922FF0D322C06DF9000BDC29 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FF0D222C06DF9000BDC29 /* UserRepository.swift */; };
 		9230B2C222B4BC1D00BDC7EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230B2C122B4BC1D00BDC7EC /* AppDelegate.swift */; };
-		9230B2CA22B4BC1D00BDC7EC /* BabylonTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9230B2C822B4BC1D00BDC7EC /* BabylonTest.xcdatamodeld */; };
 		9230B2CC22B4BC1E00BDC7EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9230B2CB22B4BC1E00BDC7EC /* Assets.xcassets */; };
 		9230B2CF22B4BC1E00BDC7EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9230B2CD22B4BC1E00BDC7EC /* LaunchScreen.storyboard */; };
 		923AEBF822BEB8D40040E7F2 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AEBF722BEB8D40040E7F2 /* Post.swift */; };
@@ -30,6 +29,7 @@
 		92A0B30622C2BB1F00E71FB9 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0B30522C2BB1F00E71FB9 /* PostDetailView.swift */; };
 		92A0B30822C2C3A800E71FB9 /* CommentRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0B30722C2C3A800E71FB9 /* CommentRespository.swift */; };
 		92A0B30B22C2CA2F00E71FB9 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0B30922C2C67B00E71FB9 /* CommentRepository.swift */; };
+		92A0B32122C350CD00E71FB9 /* BabylonTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 92A0B31F22C350CD00E71FB9 /* BabylonTest.xcdatamodeld */; };
 		92AF9BE522B94FCA0036C019 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AF9BE422B94FCA0036C019 /* PostsViewController.swift */; };
 		92AF9BE722B94FF50036C019 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AF9BE622B94FF50036C019 /* PostsViewModel.swift */; };
 		92AF9BE922B951910036C019 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AF9BE822B951910036C019 /* AppCoordinator.swift */; };
@@ -53,7 +53,6 @@
 		922FF0D222C06DF9000BDC29 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9230B2BE22B4BC1D00BDC7EC /* BabylonTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabylonTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9230B2C122B4BC1D00BDC7EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9230B2C922B4BC1D00BDC7EC /* BabylonTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BabylonTest.xcdatamodel; sourceTree = "<group>"; };
 		9230B2CB22B4BC1E00BDC7EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9230B2CE22B4BC1E00BDC7EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9230B2D022B4BC1E00BDC7EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		92A0B30522C2BB1F00E71FB9 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		92A0B30722C2C3A800E71FB9 /* CommentRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRespository.swift; sourceTree = "<group>"; };
 		92A0B30922C2C67B00E71FB9 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
+		92A0B32022C350CD00E71FB9 /* BabylonTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BabylonTest.xcdatamodel; sourceTree = "<group>"; };
 		92AF9BE422B94FCA0036C019 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		92AF9BE622B94FF50036C019 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		92AF9BE822B951910036C019 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 			children = (
 				9230B2CB22B4BC1E00BDC7EC /* Assets.xcassets */,
 				9230B2D022B4BC1E00BDC7EC /* Info.plist */,
-				9230B2C822B4BC1D00BDC7EC /* BabylonTest.xcdatamodeld */,
+				92A0B31F22C350CD00E71FB9 /* BabylonTest.xcdatamodeld */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -328,11 +328,11 @@
 				9230B2C222B4BC1D00BDC7EC /* AppDelegate.swift in Sources */,
 				923AEC0222BFB80D0040E7F2 /* APIRouter.swift in Sources */,
 				6FE8AAFF22BFFDA400360CEA /* PostCoordinator.swift in Sources */,
-				9230B2CA22B4BC1D00BDC7EC /* BabylonTest.xcdatamodeld in Sources */,
 				923AEBFC22BEB92D0040E7F2 /* Address.swift in Sources */,
 				92A0B30422C2B83700E71FB9 /* Comment.swift in Sources */,
 				6FE8AB0822C03F4800360CEA /* PostDetailCoordinator.swift in Sources */,
 				923AEBFA22BEB90C0040E7F2 /* User.swift in Sources */,
+				92A0B32122C350CD00E71FB9 /* BabylonTest.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,12 +591,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9230B2C822B4BC1D00BDC7EC /* BabylonTest.xcdatamodeld */ = {
+		92A0B31F22C350CD00E71FB9 /* BabylonTest.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				9230B2C922B4BC1D00BDC7EC /* BabylonTest.xcdatamodel */,
+				92A0B32022C350CD00E71FB9 /* BabylonTest.xcdatamodel */,
 			);
-			currentVersion = 9230B2C922B4BC1D00BDC7EC /* BabylonTest.xcdatamodel */;
+			currentVersion = 92A0B32022C350CD00E71FB9 /* BabylonTest.xcdatamodel */;
 			path = BabylonTest.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
