@@ -10,6 +10,11 @@ import UIKit
 
 class PostCell: UITableViewCell {
     
+    static let identifier = String(describing: PostCell.self)
     
+    func setupCell(for post: Post) {
+        textLabel?.text = post.title
+        textLabel?.numberOfLines = 0
+    }
     
 }

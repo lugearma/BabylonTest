@@ -33,6 +33,8 @@ final class PostsViewController: UIViewController {
     
     private func setupTableView() {
         postsTableView.translatesAutoresizingMaskIntoConstraints = false
+        postsTableView.rowHeight = UITableView.automaticDimension
+        postsTableView.estimatedRowHeight = 100
         view.addSubview(postsTableView)
         
         NSLayoutConstraint.activate([
@@ -44,7 +46,7 @@ final class PostsViewController: UIViewController {
         
         postsTableView.delegate = self
         postsTableView.dataSource = self
-        postsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "SimpleCell")
+        postsTableView.register(PostCell.self, forCellReuseIdentifier: PostCell.identifier)
     }
 }
 
@@ -57,9 +59,11 @@ extension PostsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.identifier, for: indexPath) as? PostCell else {
+            preconditionFailure("Couldn't load cell with identifier: \(PostCell.identifier)")
+        }
         let post = posts[indexPath.row]
-        cell.textLabel?.text = post.title
+        cell.setupCell(for: post)
         return cell
     }
 }
@@ -70,8 +74,18 @@ extension PostsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = posts[indexPath.row]
+        viewModel.pushToPostDetail(post: post)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
+//
 }
 
 // MARK: - AllPostsViewModelDelegate
@@ -83,7 +97,7 @@ extension PostsViewController: PostsViewModelDelegate {
         postsTableView.reloadSections([0], with: .automatic)
     }
     
-    func didThrowError(_ error: Error) {
+    func didThrow(_ error: Error) {
         print("🔥", error)
     }
 }

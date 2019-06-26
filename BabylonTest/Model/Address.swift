@@ -19,7 +19,7 @@ struct Address: Decodable {
         case street
         case suite
         case city
-        case coordinates
+        case coordinates = "geo"
     }
     
     init(from decoder: Decoder) throws {

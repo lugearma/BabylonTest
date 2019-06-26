@@ -30,6 +30,7 @@ final class AppCoordinator: CoordinatorProtocol {
     
     func start() {
         startPosts()
+        navigationController.navigationBar.prefersLargeTitles = true
         window.rootViewController = navigationController
     }
 }

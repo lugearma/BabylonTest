@@ -9,12 +9,12 @@
 import Foundation
 
 protocol PostsViewModelCoodinatorDelegate: AnyObject {
-    func presentPost(for id: String)
+    func postsPushToPostDetail(post: Post)
 }
 
 protocol PostsViewModelDelegate: AnyObject {
     func didReceivePosts(_ posts: [Post])
-    func didThrowError(_ error: Error)
+    func didThrow(_ error: Error)
 }
 
 final class PostsViewModel {
@@ -34,13 +34,13 @@ final class PostsViewModel {
                 case .success(let posts):
                     self.delegate?.didReceivePosts(posts)
                 case .failure(let error):
-                    self.delegate?.didThrowError(error)
+                    self.delegate?.didThrow(error)
                 }
             }
         }
     }
     
-    func presentPostDetail(for id: String) {
-        coordinatorDelegate?.presentPost(for: id)
+    func pushToPostDetail(post: Post) {
+        coordinatorDelegate?.postsPushToPostDetail(post: post)
     }
 }

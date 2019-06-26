@@ -21,20 +21,26 @@ enum APIClientError: Error {
 
 protocol APIClientProtocol {
     func posts(completion: @escaping PostsResult)
-    func postBy(id: String, completion: @escaping PostResult)
+    func userBy(id: String, completion: @escaping UserResult)
+    func commentsBy(postId: String, completion: @escaping CommentsResult)
 }
 
 typealias PostsResult = (Result<[Post], Error>) -> Void
-typealias PostResult = (Result<Post, Error>) -> Void
+typealias UserResult = (Result<User, Error>) -> Void
+typealias CommentsResult = (Result<[Comment], Error>) -> Void
 
 class APIClient: APIClientProtocol {
-    
+
     func posts(completion: @escaping PostsResult) {
         requestData(requestType: .get, router: .posts, completion: completion)
     }
     
-    func postBy(id: String, completion: @escaping PostResult) {
-        requestData(requestType: .get, router: .postBy(id: id), completion: completion)
+    func userBy(id: String, completion: @escaping UserResult) {
+        requestData(requestType: .get, router: .userBy(id: id), completion: completion)
+    }
+    
+    func commentsBy(postId: String, completion: @escaping CommentsResult) {
+        requestData(requestType: .get, router: .commentsBy(postId: postId), completion: completion)
     }
 }
 
@@ -43,6 +49,7 @@ extension APIClient {
     func requestData<T: Decodable>(requestType: RequestType, router: APIRouter, parameters: [String : Any] = [:], completion: @escaping (Result<T, Error>) -> Void) {
         let url = router.composedURL
         let request = URLRequest(url: url)
+        
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {

@@ -1,5 +1,5 @@
 //
-//  PostRepository.swift
+//  UserRepository.swift
 //  BabylonTest
 //
 //  Created by Luis Arias on 6/23/19.
@@ -8,22 +8,21 @@
 
 import Foundation
 
-protocol PostRepositoryProtocol {
+protocol UserRepositoryProtocol {
     var apiClient: APIClientProtocol { get }
     init(apiClient: APIClientProtocol)
     
-    func posts(completion: @escaping PostsResult)
+    func userBy(id: Int, completion: @escaping UserResult)
 }
 
-class PostRepository: PostRepositoryProtocol {
-    
+class UserRepository: UserRepositoryProtocol {
     var apiClient: APIClientProtocol
     
     required init(apiClient: APIClientProtocol) {
         self.apiClient = apiClient
     }
     
-    func posts(completion: @escaping PostsResult) {
-        apiClient.posts(completion: completion)
+    func userBy(id: Int, completion: @escaping UserResult) {
+        apiClient.userBy(id: "\(id)", completion: completion)
     }
 }

@@ -11,7 +11,8 @@ import Foundation
 
 enum APIRouter {
     case posts
-    case postBy(id: String)
+    case userBy(id: String)
+    case commentsBy(postId: String)
 }
 
 extension APIRouter {
@@ -24,8 +25,10 @@ extension APIRouter {
         switch self {
         case .posts:
             return "/posts"
-        case .postBy(let id):
-            return "/posts/\(id)"
+        case .userBy(let id):
+            return "/users/\(id)"
+        case .commentsBy(let postId):
+            return "/comments?postId=\(postId)"
         }
     }
     

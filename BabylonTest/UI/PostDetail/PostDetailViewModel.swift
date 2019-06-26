@@ -9,29 +9,65 @@
 import Foundation
 
 protocol PostDetailViewModelDelegate: AnyObject {
-    func didReceivePost(_ post: Post)
-    func didThrowError(_ error: Error)
+    func didReceivePostDetail(postDetail: PostDetail)
+    func didThrow(error: Error)
 }
 
 class PostDetailViewModel {
     
     weak var delegate: PostDetailViewModelDelegate?
-    let postRepository: PostRepositoryProtocol
-    let postId: String
+    private let userRepository: UserRepositoryProtocol
+    private let commentRepository: CommentRespositoryProtocol
+    private var postDetailGroup = DispatchGroup()
     
-    init(repository: PostRepositoryProtocol, postId: String) {
-        self.postRepository = repository
-        self.postId = postId
+    var user: User?
+    let post: Post
+    var comments: [Comment] = []
+    
+    
+    init(repository: UserRepositoryProtocol, commentRepository: CommentRespositoryProtocol, post: Post) {
+        self.userRepository = repository
+        self.commentRepository = commentRepository
+        self.post = post
+        fetchUser()
+        fetchCommments()
+        postDetailGroup.notify(queue: .main, execute: fetchCompleted)
     }
     
-    func fetchPost() {
-        postRepository.postBy(id: postId) { [unowned self] result in
-            switch result {
-            case .success(let post):
-                self.delegate?.didReceivePost(post)
-            case .failure(let error):
-                self.delegate?.didThrowError(error)
+    func fetchUser() {
+        postDetailGroup.enter()
+        userRepository.userBy(id: post.userId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    self.user = user
+                case .failure(let error):
+                    self.delegate?.didThrow(error: error)
+                }
+                self.postDetailGroup.leave()
             }
         }
+    }
+    
+    func fetchCommments() {
+        postDetailGroup.enter()
+        commentRepository.commentsBy(postId: post.id) { result in
+            switch result {
+            case .success(let comments):
+                self.comments = comments
+            case .failure(let error):
+                self.delegate?.didThrow(error: error)
+            }
+            self.postDetailGroup.leave()
+        }
+    }
+    
+    func fetchCompleted() {
+        guard let user = user else {
+            // TODO: Notify error to delegate
+            return
+        }
+        let postDetail = PostDetail(user: user, body: post.body, numberOfComments: comments.count)
+        delegate?.didReceivePostDetail(postDetail: postDetail)
     }
 }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum PostsFlow {
+    case postDetail
+}
+
 protocol PostsCoordinatorDelegate: AnyObject {
     func presentPost(for id: String)
 }
@@ -16,12 +20,16 @@ class PostsCoordinator: CoordinatorProtocol {
     
     private var apiClient: APIClientProtocol
     private var navigationController: UINavigationController
+    private var postRespository: PostRepositoryProtocol
+    private lazy var postsController: PostsViewController = configureController()
+    
     weak var delegate: PostsCoordinatorDelegate?
-    lazy var postsController: PostsViewController = configureController()
+    var coordinators: [PostsFlow : CoordinatorProtocol] = [:]
     
     init(navigationController: UINavigationController, apiClient: APIClientProtocol) {
         self.navigationController = navigationController
         self.apiClient = apiClient
+        self.postRespository = PostRepository(apiClient: apiClient)
     }
     
     func start() {
@@ -29,7 +37,6 @@ class PostsCoordinator: CoordinatorProtocol {
     }
     
     private func configureController() -> PostsViewController {
-        let postRespository = PostRepository(apiClient: apiClient)
         let viewModel = PostsViewModel(repository: postRespository)
         viewModel.coordinatorDelegate = self
         let postsViewController = PostsViewController(viewModel: viewModel)
@@ -41,7 +48,13 @@ class PostsCoordinator: CoordinatorProtocol {
 
 extension PostsCoordinator: PostsViewModelCoodinatorDelegate {
     
-    func presentPost(for id: String) {
-        delegate?.presentPost(for: id)
+    func postsPushToPostDetail(post: Post) {
+        showPostDetail(post: post)
+    }
+    
+    func showPostDetail(post: Post) {
+        let coordinator = PostDetailCoordinator(navigationController: navigationController, apiClient: apiClient, post: post)
+        coordinators[.postDetail] = coordinator
+        coordinator.start()
     }
 }

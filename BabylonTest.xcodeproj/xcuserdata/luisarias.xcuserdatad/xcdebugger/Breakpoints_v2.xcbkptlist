@@ -17,38 +17,6 @@
             endingLineNumber = "27"
             landmarkName = "fetchPosts()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;BabylonTest.Post&gt;, Swift.Error&gt;) -&gt; () in BabylonTest.AllPostsViewModel.fetchPosts() -&gt; ()"
-                  moduleName = "BabylonTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luisarias/Documents/Development/Interviews/BabylonTest/BabylonTest/UI/AllPosts/AllPostsViewModel.swift"
-                  timestampString = "582992264.209412"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "200">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;BabylonTest.Post&gt;, Swift.Error&gt;) -&gt; () in BabylonTest.AllPostsViewModel.fetchPosts() -&gt; ()"
-                  moduleName = "BabylonTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/luisarias/Documents/Development/Interviews/BabylonTest/BabylonTest/UI/AllPosts/AllPostsViewModel.swift"
-                  timestampString = "582992264.213114"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "207">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -65,6 +33,54 @@
             endingLineNumber = "28"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BabylonTest/Networking/APIClient.swift"
+            timestampString = "583223269.869471"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "requestData(requestType:router:parameters:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BabylonTest.APIClient.requestData&lt;A where A: Swift.Decodable&gt;(requestType: BabylonTest.RequestType, router: BabylonTest.APIRouter, parameters: Swift.Dictionary&lt;Swift.String, Any&gt;, completion: (Swift.Result&lt;A, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "BabylonTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luisarias/Documents/Development/Interviews/BabylonTest/BabylonTest/Networking/APIClient.swift"
+                  timestampString = "583190563.047766"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "548">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in BabylonTest.APIClient.requestData&lt;A where A: Swift.Decodable&gt;(requestType: BabylonTest.RequestType, router: BabylonTest.APIRouter, parameters: Swift.Dictionary&lt;Swift.String, Any&gt;, completion: (Swift.Result&lt;A, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "BabylonTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luisarias/Documents/Development/Interviews/BabylonTest/BabylonTest/Networking/APIClient.swift"
+                  timestampString = "583190563.049253"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "350">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

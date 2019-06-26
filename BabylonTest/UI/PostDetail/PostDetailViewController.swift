@@ -12,9 +12,21 @@ final class PostDetailViewController: UIViewController {
     
     let viewModel: PostDetailViewModel
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .gray)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(indicator)
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            ])
+        return indicator
+    }()
+    
     init(viewModel: PostDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -23,6 +35,34 @@ final class PostDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchPost()
+        viewModel.fetchUser()
+        view.backgroundColor = .white
+        title = "Post detail"
+        activityIndicator.startAnimating()
+    }
+    
+    private func setupPostDetailView(_ postDetail: PostDetail) {
+        let postDetailView = PostDetailView(postDetail: postDetail)
+        postDetailView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(postDetailView)
+        NSLayoutConstraint.activate([
+            postDetailView.topAnchor.constraint(equalTo: view.topAnchor),
+            postDetailView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            postDetailView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            postDetailView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+    }
+}
+
+// MARK: - PostDetailViewModelDelegate
+
+extension PostDetailViewController: PostDetailViewModelDelegate {
+    func didReceivePostDetail(postDetail: PostDetail) {
+        activityIndicator.stopAnimating()
+        setupPostDetailView(postDetail)
+    }
+    
+    func didThrow(error: Error) {
+        print("🔥", error)
     }
 }

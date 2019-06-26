@@ -12,4 +12,10 @@ struct Company: Decodable {
     let name: String
     let business: String
     let catchPhrase: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case catchPhrase
+        case business = "bs"
+    }
 }
