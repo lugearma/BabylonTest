@@ -17,6 +17,7 @@ enum RequestType: String {
 
 enum APIClientError: Error {
     case missingData
+    case noInternetConnection
 }
 
 protocol APIClientProtocol {
@@ -50,23 +51,29 @@ extension APIClient {
         let url = router.composedURL
         let request = URLRequest(url: url)
         
-        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                completion(.failure(error))
-            }
-            
-            guard let data = data else {
-                completion(.failure(APIClientError.missingData))
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let type = try decoder.decode(T.self, from: data)
-                completion(.success(type))
-            } catch {
-                completion(.failure(error))
+                guard
+                    let urlError = error as? URLError,
+                    urlError.code == .notConnectedToInternet else {
+                    completion(.failure(error))
+                    return
+                }
+                
+                completion(.failure(APIClientError.noInternetConnection))
+            } else {
+                guard let data = data else {
+                    completion(.failure(APIClientError.missingData))
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let type = try decoder.decode(T.self, from: data)
+                    completion(.success(type))
+                } catch {
+                    completion(.failure(error))
+                }
             }
         }
         

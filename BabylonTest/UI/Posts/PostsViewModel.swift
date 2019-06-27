@@ -34,9 +34,29 @@ final class PostsViewModel {
                 case .success(let posts):
                     self.delegate?.didReceivePosts(posts)
                 case .failure(let error):
+                    guard let apiError = error as? APIClientError else {
+                        self.delegate?.didThrow(error)
+                        return
+                    }
+                    self.manageAPIErrors(error: apiError)
+                }
+            }
+        }
+    }
+    
+    private func manageAPIErrors(error: APIClientError) {
+        switch error {
+        case .noInternetConnection:
+            self.postRepository.postsFromPersistence { result in
+                switch result {
+                case .success(let posts):
+                    self.delegate?.didReceivePosts(posts)
+                case .failure(let error):
                     self.delegate?.didThrow(error)
                 }
             }
+        case .missingData:
+            delegate?.didThrow(error)
         }
     }
     

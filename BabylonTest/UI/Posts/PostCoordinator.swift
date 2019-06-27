@@ -26,10 +26,11 @@ class PostsCoordinator: CoordinatorProtocol {
     weak var delegate: PostsCoordinatorDelegate?
     var coordinators: [PostsFlow : CoordinatorProtocol] = [:]
     
-    init(navigationController: UINavigationController, apiClient: APIClientProtocol) {
+    init(navigationController: UINavigationController, apiClient: APIClientProtocol, persistentClient: PersistentClientProtocol) {
         self.navigationController = navigationController
         self.apiClient = apiClient
-        self.postRespository = PostRepository(apiClient: apiClient)
+        self.postRespository = PostRepository(apiClient: apiClient, persistentClient: persistentClient)
+        
     }
     
     func start() {

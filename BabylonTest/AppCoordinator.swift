@@ -20,12 +20,16 @@ final class AppCoordinator: CoordinatorProtocol {
     
     let window: UIWindow
     let apiClient: APIClientProtocol
+    let persistentManager: PersistentManager
+    let persistentClient: PersistentClientProtocol
     var coordinators: [Coodinator : CoordinatorProtocol] = [:]
     let navigationController = UINavigationController()
     
-    init(window: UIWindow, apiClient: APIClientProtocol) {
+    init(window: UIWindow, apiClient: APIClientProtocol, persistentManager: PersistentManager) {
         self.window = window
         self.apiClient = apiClient
+        self.persistentManager = persistentManager
+        self.persistentClient = PersistentClient(persistentManager: persistentManager)
     }
     
     func start() {
@@ -44,7 +48,7 @@ extension AppCoordinator: PostsCoordinatorDelegate {
     }
     
     private func startPosts() {
-        let postsCoordinator = PostsCoordinator(navigationController: navigationController, apiClient: apiClient)
+        let postsCoordinator = PostsCoordinator(navigationController: navigationController, apiClient: apiClient, persistentClient: persistentClient)
         postsCoordinator.delegate = self
         coordinators[.posts] = postsCoordinator
         postsCoordinator.start()

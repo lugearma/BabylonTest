@@ -77,15 +77,6 @@ extension PostsViewController: UITableViewDelegate {
         viewModel.pushToPostDetail(post: post)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-//
 }
 
 // MARK: - AllPostsViewModelDelegate
