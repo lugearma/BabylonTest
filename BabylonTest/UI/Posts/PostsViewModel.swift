@@ -22,9 +22,11 @@ final class PostsViewModel {
     weak var delegate: PostsViewModelDelegate?
     weak var coordinatorDelegate: PostsViewModelCoodinatorDelegate?
     let postRepository: PostRepositoryProtocol
+    let persistentClient: PersistentClientProtocol
     
-    init(repository: PostRepositoryProtocol) {
+    init(repository: PostRepositoryProtocol, persistentClient: PersistentClientProtocol) {
         self.postRepository = repository
+        self.persistentClient = persistentClient
     }
     
     func fetchPosts() {
@@ -32,31 +34,27 @@ final class PostsViewModel {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let posts):
+                    self.persistentClient.savePosts(posts)
                     self.delegate?.didReceivePosts(posts)
                 case .failure(let error):
-                    guard let apiError = error as? APIClientError else {
+                    if (error as? APIClientError) == .noInternetConnection {
+                        self.fetchPostFromPersistence()
+                    } else {
                         self.delegate?.didThrow(error)
-                        return
                     }
-                    self.manageAPIErrors(error: apiError)
                 }
             }
         }
     }
     
-    private func manageAPIErrors(error: APIClientError) {
-        switch error {
-        case .noInternetConnection:
-            self.postRepository.postsFromPersistence { result in
-                switch result {
-                case .success(let posts):
-                    self.delegate?.didReceivePosts(posts)
-                case .failure(let error):
-                    self.delegate?.didThrow(error)
-                }
+    private func fetchPostFromPersistence() {
+        persistentClient.posts { [unowned self] result in
+            switch result {
+            case .success(let posts):
+                self.delegate?.didReceivePosts(posts)
+            case .failure(let error):
+                self.delegate?.didThrow(error)
             }
-        case .missingData:
-            delegate?.didThrow(error)
         }
     }
     

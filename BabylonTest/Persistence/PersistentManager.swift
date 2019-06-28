@@ -14,6 +14,19 @@ protocol PersistentManagerProtocol {
     init(container: NSPersistentContainer)
     
     func fetchData<T: NSManagedObject>(request: NSFetchRequest<T>) -> Result<[T], Error>
+    func insertNewData(for entityName: String, objectHandler: @escaping ((NSManagedObject) -> Void))
+    func commitChanges()
+}
+
+extension PersistentManagerProtocol {
+    func commitChanges() {
+        do {
+            guard persistentContainer.viewContext.hasChanges else { return }
+            try persistentContainer.viewContext.save()
+        } catch {
+            // TODO: What do i have to do here?
+        }
+    }
 }
 
 class PersistentManager: PersistentManagerProtocol {
@@ -33,19 +46,8 @@ class PersistentManager: PersistentManagerProtocol {
         }
     }
     
-    func saveData(_ data: [Post]) {
-        for post in data {
-            let newPost = NSEntityDescription.insertNewObject(forEntityName: "ManagedPost", into: self.persistentContainer.viewContext) as! ManagedPost
-            newPost.body = post.body
-            newPost.title = post.title
-            newPost.id = Int32(post.id)
-            newPost.userId = Int32(post.userId)
-        }
-        
-        do {
-            try self.persistentContainer.viewContext.save()
-        } catch {
-            // TODO: What do i have to do here?
-        }
+    func insertNewData(for entityName: String, objectHandler: @escaping (NSManagedObject) -> Void) {
+        let object = NSEntityDescription.insertNewObject(forEntityName: entityName, into: persistentContainer.viewContext)
+        objectHandler(object)
     }
 }

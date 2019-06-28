@@ -13,7 +13,7 @@ class PostCell: UITableViewCell {
     static let identifier = String(describing: PostCell.self)
     
     func setupCell(for post: Post) {
-        textLabel?.text = post.title
+        textLabel?.text = "\(post.userId) - " + post.title
         textLabel?.numberOfLines = 0
     }
     

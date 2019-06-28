@@ -63,7 +63,11 @@ extension PostDetailViewController: PostDetailViewModelDelegate {
         setupPostDetailView(postDetail)
     }
     
-    func didThrow(error: Error) {
+    func didThrow(_ error: Error) {
+        if let _ = error as? PersistentClientError {
+            
+            // TODO: Present Alert.
+        }
         print("🔥", error)
     }
 }

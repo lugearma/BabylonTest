@@ -10,28 +10,20 @@ import Foundation
 
 protocol PostRepositoryProtocol {
     var apiClient: APIClientProtocol { get }
-    var persistentClient: PersistentClientProtocol { get }
-    init(apiClient: APIClientProtocol, persistentClient: PersistentClientProtocol)
+    init(apiClient: APIClientProtocol)
     
     func posts(completion: @escaping PostsResult)
-    func postsFromPersistence(completion: @escaping PostsResult)
 }
 
 class PostRepository: PostRepositoryProtocol {
     
     let apiClient: APIClientProtocol
-    let persistentClient: PersistentClientProtocol
     
-    required init(apiClient: APIClientProtocol, persistentClient: PersistentClientProtocol) {
+    required init(apiClient: APIClientProtocol) {
         self.apiClient = apiClient
-        self.persistentClient = persistentClient
     }
     
     func posts(completion: @escaping PostsResult) {
         apiClient.posts(completion: completion)
-    }
-    
-    func postsFromPersistence(completion: @escaping PostsResult) {
-        persistentClient.fetchPosts(completion: completion)
     }
 }

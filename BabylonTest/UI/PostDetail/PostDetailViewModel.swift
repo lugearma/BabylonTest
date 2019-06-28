@@ -10,7 +10,7 @@ import Foundation
 
 protocol PostDetailViewModelDelegate: AnyObject {
     func didReceivePostDetail(postDetail: PostDetail)
-    func didThrow(error: Error)
+    func didThrow(_ error: Error)
 }
 
 class PostDetailViewModel {
@@ -19,15 +19,17 @@ class PostDetailViewModel {
     private let userRepository: UserRepositoryProtocol
     private let commentRepository: CommentRespositoryProtocol
     private var postDetailGroup = DispatchGroup()
+    private let persistentClient: PersistentClientProtocol
     
     var user: User?
     let post: Post
     var comments: [Comment] = []
     
     
-    init(repository: UserRepositoryProtocol, commentRepository: CommentRespositoryProtocol, post: Post) {
+    init(repository: UserRepositoryProtocol, commentRepository: CommentRespositoryProtocol, persistentClient: PersistentClientProtocol, post: Post) {
         self.userRepository = repository
         self.commentRepository = commentRepository
+        self.persistentClient = persistentClient
         self.post = post
     }
     
@@ -39,25 +41,42 @@ class PostDetailViewModel {
     
     private func fetchUser() {
         postDetailGroup.enter()
-        userRepository.userBy(id: post.userId) { result in
+        userRepository.userBy(id: post.userId) { [unowned self] result in
             switch result {
             case .success(let user):
+                self.persistentClient.saveUser(user)
                 self.user = user
             case .failure(let error):
-                self.delegate?.didThrow(error: error)
+                if (error as? APIClientError) == .noInternetConnection {
+                    self.fetchUserFromPersistence()
+                } else {
+                    self.delegate?.didThrow(error)
+                }
             }
             self.postDetailGroup.leave()
         }
     }
     
+    private func fetchUserFromPersistence() {
+        persistentClient.userBy(id: "\(post.userId)") { [unowned self] result in
+            switch result {
+            case .success(let user):
+                self.user = user
+            case .failure(let error):
+                self.delegate?.didThrow(error)
+            }
+        }
+    }
+
+    
     private func fetchCommments() {
         postDetailGroup.enter()
-        commentRepository.commentsBy(postId: post.id) { result in
+        commentRepository.commentsBy(postId: post.id) { [unowned self] result in
             switch result {
             case .success(let comments):
                 self.comments = comments
             case .failure(let error):
-                self.delegate?.didThrow(error: error)
+                self.delegate?.didThrow(error)
             }
             self.postDetailGroup.leave()
         }

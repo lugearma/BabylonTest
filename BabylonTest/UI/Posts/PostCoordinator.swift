@@ -21,6 +21,7 @@ class PostsCoordinator: CoordinatorProtocol {
     private var apiClient: APIClientProtocol
     private var navigationController: UINavigationController
     private var postRespository: PostRepositoryProtocol
+    private var persistentClient: PersistentClientProtocol
     private lazy var postsController: PostsViewController = configureController()
     
     weak var delegate: PostsCoordinatorDelegate?
@@ -29,8 +30,8 @@ class PostsCoordinator: CoordinatorProtocol {
     init(navigationController: UINavigationController, apiClient: APIClientProtocol, persistentClient: PersistentClientProtocol) {
         self.navigationController = navigationController
         self.apiClient = apiClient
-        self.postRespository = PostRepository(apiClient: apiClient, persistentClient: persistentClient)
-        
+        self.postRespository = PostRepository(apiClient: apiClient)
+        self.persistentClient = persistentClient
     }
     
     func start() {
@@ -38,7 +39,7 @@ class PostsCoordinator: CoordinatorProtocol {
     }
     
     private func configureController() -> PostsViewController {
-        let viewModel = PostsViewModel(repository: postRespository)
+        let viewModel = PostsViewModel(repository: postRespository, persistentClient: persistentClient)
         viewModel.coordinatorDelegate = self
         let postsViewController = PostsViewController(viewModel: viewModel)
         return postsViewController
@@ -54,7 +55,7 @@ extension PostsCoordinator: PostsViewModelCoodinatorDelegate {
     }
     
     func showPostDetail(post: Post) {
-        let coordinator = PostDetailCoordinator(navigationController: navigationController, apiClient: apiClient, post: post)
+        let coordinator = PostDetailCoordinator(navigationController: navigationController, apiClient: apiClient, persistentClient: persistentClient, post: post)
         coordinators[.postDetail] = coordinator
         coordinator.start()
     }
