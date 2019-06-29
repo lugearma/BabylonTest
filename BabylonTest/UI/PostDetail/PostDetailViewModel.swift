@@ -21,9 +21,9 @@ class PostDetailViewModel {
     private var postDetailGroup = DispatchGroup()
     private let persistentClient: PersistentClientProtocol
     
-    var user: User?
     let post: Post
-    var comments: [Comment] = []
+    var user: User?
+    var comments: [Comment]?
     
     
     init(repository: UserRepositoryProtocol, commentRepository: CommentRespositoryProtocol, persistentClient: PersistentClientProtocol, post: Post) {
@@ -56,6 +56,38 @@ class PostDetailViewModel {
             self.postDetailGroup.leave()
         }
     }
+
+    private func fetchCommments() {
+        postDetailGroup.enter()
+        commentRepository.commentsBy(postId: post.id) { [unowned self] result in
+            switch result {
+            case .success(let comments):
+                self.persistentClient.saveComments(comments)
+                self.comments = comments
+            case .failure(let error):
+                if (error as? APIClientError) == .noInternetConnection {
+                    self.fetchCommentsFromPersistent()
+                } else {
+                    self.delegate?.didThrow(error)
+                }
+            }
+            self.postDetailGroup.leave()
+        }
+    }
+    
+    private func fetchCompleted() {
+        guard let user = user, let comments = comments else {
+            delegate?.didThrow(PersistentClientError.dataNotFound)
+            return
+        }
+        let postDetail = PostDetail(user: user, body: post.body, numberOfComments: comments.count)
+        delegate?.didReceivePostDetail(postDetail: postDetail)
+    }
+}
+
+// MARK: - Persistent Utils
+
+extension PostDetailViewModel {
     
     private func fetchUserFromPersistence() {
         persistentClient.userBy(id: "\(post.userId)") { [unowned self] result in
@@ -67,27 +99,15 @@ class PostDetailViewModel {
             }
         }
     }
-
     
-    private func fetchCommments() {
-        postDetailGroup.enter()
-        commentRepository.commentsBy(postId: post.id) { [unowned self] result in
+    private func fetchCommentsFromPersistent() {
+        persistentClient.commentsBy(postId: "\(post.id)") { result in
             switch result {
             case .success(let comments):
                 self.comments = comments
             case .failure(let error):
                 self.delegate?.didThrow(error)
             }
-            self.postDetailGroup.leave()
         }
-    }
-    
-    private func fetchCompleted() {
-        guard let user = user else {
-            // TODO: Notify error to delegate
-            return
-        }
-        let postDetail = PostDetail(user: user, body: post.body, numberOfComments: comments.count)
-        delegate?.didReceivePostDetail(postDetail: postDetail)
     }
 }

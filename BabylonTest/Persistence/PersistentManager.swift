@@ -14,7 +14,8 @@ protocol PersistentManagerProtocol {
     init(container: NSPersistentContainer)
     
     func fetchData<T: NSManagedObject>(request: NSFetchRequest<T>) -> Result<[T], Error>
-    func insertNewData(for entityName: String, objectHandler: @escaping ((NSManagedObject) -> Void))
+    func insertNewData<T: NSManagedObject>(for entityName: String, objectHandler: @escaping (T) -> Void)
+    func removeManagedObjects(_ objects: [NSManagedObject])
     func commitChanges()
 }
 
@@ -23,6 +24,7 @@ extension PersistentManagerProtocol {
         do {
             guard persistentContainer.viewContext.hasChanges else { return }
             try persistentContainer.viewContext.save()
+            print("✅ Saved")
         } catch {
             // TODO: What do i have to do here?
         }
@@ -39,15 +41,23 @@ class PersistentManager: PersistentManagerProtocol {
     
     func fetchData<T>(request: NSFetchRequest<T>) -> Result<[T], Error> {
         do {
-            let data = try persistentContainer.viewContext.fetch(request)
+            let data = try self.persistentContainer.viewContext.fetch(request)
             return .success(data)
         } catch {
             return .failure(error)
         }
     }
     
-    func insertNewData(for entityName: String, objectHandler: @escaping (NSManagedObject) -> Void) {
-        let object = NSEntityDescription.insertNewObject(forEntityName: entityName, into: persistentContainer.viewContext)
+    func insertNewData<T: NSManagedObject>(for entityName: String, objectHandler: @escaping (T) -> Void) {
+        guard let object = NSEntityDescription.insertNewObject(forEntityName: entityName, into: persistentContainer.viewContext) as? T else {
+            return
+        }
         objectHandler(object)
+    }
+    
+    func removeManagedObjects(_ objects: [NSManagedObject]) {
+        objects.forEach {
+            persistentContainer.viewContext.delete($0)
+        }
     }
 }

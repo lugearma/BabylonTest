@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ManagedComment" representedClassName="ManagedComment" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="email" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -19,8 +19,8 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ManagedPost" positionX="-54" positionY="-9" width="128" height="105"/>
-        <element name="ManagedUser" positionX="-54" positionY="18" width="128" height="90"/>
-        <element name="ManagedComment" positionX="-45" positionY="36" width="128" height="120"/>
+        <element name="ManagedComment" positionX="-27" positionY="54" width="128" height="120"/>
+        <element name="ManagedPost" positionX="-66.55078125" positionY="-103.78515625" width="128" height="105"/>
+        <element name="ManagedUser" positionX="135.62109375" positionY="140.55078125" width="128" height="90"/>
     </elements>
 </model>
