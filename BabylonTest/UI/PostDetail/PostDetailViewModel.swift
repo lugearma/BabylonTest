@@ -94,8 +94,8 @@ extension PostDetailViewModel {
             switch result {
             case .success(let user):
                 self.user = user
-            case .failure(let error):
-                self.delegate?.didThrow(error)
+            case .failure:
+                return
             }
         }
     }
@@ -105,8 +105,8 @@ extension PostDetailViewModel {
             switch result {
             case .success(let comments):
                 self.comments = comments
-            case .failure(let error):
-                self.delegate?.didThrow(error)
+            case .failure:
+                return
             }
         }
     }

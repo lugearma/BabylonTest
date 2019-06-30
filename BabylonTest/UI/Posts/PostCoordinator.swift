@@ -13,7 +13,6 @@ enum PostsFlow {
 }
 
 protocol PostsCoordinatorDelegate: AnyObject {
-    func presentPost(for id: String)
 }
 
 class PostsCoordinator: CoordinatorProtocol {

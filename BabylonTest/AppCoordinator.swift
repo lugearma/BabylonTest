@@ -43,10 +43,6 @@ final class AppCoordinator: CoordinatorProtocol {
 
 extension AppCoordinator: PostsCoordinatorDelegate {
     
-    func presentPost(for id: String) {
-        
-    }
-    
     private func startPosts() {
         let postsCoordinator = PostsCoordinator(navigationController: navigationController, apiClient: apiClient, persistentClient: persistentClient)
         postsCoordinator.delegate = self
