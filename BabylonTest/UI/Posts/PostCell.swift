@@ -12,7 +12,7 @@ class PostCell: UITableViewCell {
     
     static let identifier = String(describing: PostCell.self)
     
-    lazy var containerStackView: UIStackView = {
+    private lazy var containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,43 +23,16 @@ class PostCell: UITableViewCell {
         return stackView
     }()
     
-    lazy var idLabel: UILabel = {
-        let label = UILabel()
-        let attributedTitle = NSAttributedString(string: "ID: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
-        label.attributedText = attributedTitle
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    lazy var userIdLabel: UILabel = {
-        let label = UILabel()
-        let attributedTitle = NSAttributedString(string: "User ID: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
-        label.attributedText = attributedTitle
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        let attributedTitle = NSAttributedString(string: "Title: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
-        label.attributedText = attributedTitle
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    lazy var bodyLabel: UILabel = {
-        let label = UILabel()
-        let attributedTitle = NSAttributedString(string: "Body: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
-        label.attributedText = attributedTitle
-        label.numberOfLines = 0
-        return label
-    }()
+    private lazy var idLabel = makeFieldDescriptionLabel(fieldType: .id)
+    private lazy var userIdLabel = makeFieldDescriptionLabel(fieldType: .userId)
+    private lazy var titleLabel = makeFieldDescriptionLabel(fieldType: .title)
+    private lazy var bodyLabel = makeFieldDescriptionLabel(fieldType: .body)
     
     override func prepareForReuse() {
-        idLabel.attributedText = NSAttributedString(string: "ID: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
-        userIdLabel.attributedText = NSAttributedString(string: "User ID: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
-        titleLabel.attributedText = NSAttributedString(string: "Title: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
-        bodyLabel.attributedText = NSAttributedString(string: "Body: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
+        idLabel.setDefaultTitle(fieldType: .id)
+        userIdLabel.setDefaultTitle(fieldType: .userId)
+        titleLabel.setDefaultTitle(fieldType: .title)
+        bodyLabel.setDefaultTitle(fieldType: .body)
     }
     
     func setupCell(for post: Post) {
@@ -78,7 +51,15 @@ class PostCell: UITableViewCell {
             ])
     }
     
-    func makeAttributedTitle(for label: UILabel, usingTitle title: String) -> NSAttributedString {
+    private func makeFieldDescriptionLabel(fieldType type: UILabel.PostField) -> UILabel {
+        let label = UILabel()
+        label.setDefaultTitle(fieldType: type)
+        label.numberOfLines = 0
+        return label
+
+    }
+    
+    private func makeAttributedTitle(for label: UILabel, usingTitle title: String) -> NSAttributedString {
         guard let defaultAttributedText = label.attributedText else {
             return NSAttributedString(string: title)
         }
@@ -91,6 +72,31 @@ class PostCell: UITableViewCell {
 // MARK: - PostCell Utils
 
 private extension UILabel {
+    
+    enum PostField {
+        case id
+        case userId
+        case title
+        case body
+        
+        var description: String {
+            switch self {
+            case .id:
+                return "ID: "
+            case .userId:
+                return "User ID: "
+            case .title:
+                return "Title: "
+            case .body:
+                return "Body: "
+            }
+        }
+    }
+    
+    func setDefaultTitle(fieldType type: PostField) {
+        let attributedTitle = NSAttributedString(string: type.description, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .semibold)])
+        attributedText = attributedTitle
+    }
     
     func setAttributedTitle(title: String) {
         guard let defaultAttributedText = attributedText else {
