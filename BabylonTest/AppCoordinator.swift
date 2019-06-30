@@ -19,13 +19,13 @@ protocol CoordinatorProtocol {
 final class AppCoordinator: CoordinatorProtocol {
     
     let window: UIWindow
-    let apiClient: APIClientProtocol
-    let persistentManager: PersistentManager
+    let apiClient: DataClientProtocol
+    let persistentManager: PersistentManagerProtocol
     let persistentClient: PersistentClientProtocol
     var coordinators: [CoodinatorFlow : CoordinatorProtocol] = [:]
     let navigationController = UINavigationController()
     
-    init(window: UIWindow, apiClient: APIClientProtocol, persistentManager: PersistentManager) {
+    init(window: UIWindow, apiClient: DataClientProtocol, persistentManager: PersistentManagerProtocol) {
         self.window = window
         self.apiClient = apiClient
         self.persistentManager = persistentManager

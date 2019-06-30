@@ -18,18 +18,9 @@ enum RequestType: String {
 enum APIClientError: Error {
     case missingData
     case noInternetConnection
-    
-    var localizedDescription: String {
-        switch self {
-        case .missingData:
-            return "Couldn't get data."
-        case .noInternetConnection:
-            return "No internet conection, verify you are connected to internet."
-        }
-    }
 }
 
-protocol APIClientProtocol {
+protocol DataClientProtocol {
     func posts(completion: @escaping PostsResult)
     func userBy(id: String, completion: @escaping UserResult)
     func commentsBy(postId: String, completion: @escaping CommentsResult)
@@ -39,7 +30,7 @@ typealias PostsResult = (Result<[Post], Error>) -> Void
 typealias UserResult = (Result<User, Error>) -> Void
 typealias CommentsResult = (Result<[Comment], Error>) -> Void
 
-class APIClient: APIClientProtocol {
+class APIClient: DataClientProtocol {
 
     func posts(completion: @escaping PostsResult) {
         requestData(requestType: .get, router: .posts, completion: completion)
@@ -55,7 +46,7 @@ class APIClient: APIClientProtocol {
 }
 
 extension APIClient {
-    // TODO: Modify this to Codable.
+
     func requestData<T: Decodable>(requestType: RequestType, router: APIRouter, parameters: [String : Any] = [:], completion: @escaping (Result<T, Error>) -> Void) {
         let url = router.composedURL
         let request = URLRequest(url: url)

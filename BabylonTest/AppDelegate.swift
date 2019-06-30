@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var coordinator: CoordinatorProtocol?
     let apiClient = APIClient()
-    var persistentManager: PersistentManager?
+    var persistentManager: PersistentManagerProtocol?
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "BabylonTest")
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        guard let window = window else { preconditionFailure("Unexpected failure, invalid value for window  ") }
+        guard let window = window else { preconditionFailure("Unexpected failure, invalid value for window") }
         persistentManager = PersistentManager(container: persistentContainer)
         coordinator = AppCoordinator(window: window, apiClient: apiClient, persistentManager: persistentManager!)
         coordinator?.start()

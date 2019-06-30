@@ -15,7 +15,6 @@ protocol PersistentManagerProtocol {
     
     func fetchData<T: NSManagedObject>(request: NSFetchRequest<T>) -> Result<[T], Error>
     func insertNewData<T: NSManagedObject>(for entityName: String, objectHandler: @escaping (T) -> Void)
-    func removeManagedObjects(_ objects: [NSManagedObject])
     func commitChanges()
 }
 
@@ -24,10 +23,7 @@ extension PersistentManagerProtocol {
         guard persistentContainer.viewContext.hasChanges else { return }
         do {
             try persistentContainer.viewContext.save()
-            print("✅ Saved")
-        } catch {
-            // TODO: What do i have to do here?
-        }
+        } catch { }
     }
 }
 
@@ -53,11 +49,5 @@ class PersistentManager: PersistentManagerProtocol {
             return
         }
         objectHandler(object)
-    }
-    
-    func removeManagedObjects(_ objects: [NSManagedObject]) {
-        objects.forEach {
-            persistentContainer.viewContext.delete($0)
-        }
     }
 }

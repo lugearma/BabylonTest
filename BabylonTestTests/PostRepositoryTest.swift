@@ -11,7 +11,7 @@ import XCTest
 
 class PostRepositoryTest: XCTestCase {
     
-    var apiClient: APIClientProtocol!
+    var apiClient: DataClientProtocol!
     var postRepository: PostRepositoryProtocol!
     
     override func setUp() {

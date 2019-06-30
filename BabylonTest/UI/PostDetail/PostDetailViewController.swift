@@ -10,7 +10,7 @@ import UIKit
 
 final class PostDetailViewController: UIViewController {
     
-    let viewModel: PostDetailViewModel
+    private let viewModel: PostDetailViewModel
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .gray)

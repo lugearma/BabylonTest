@@ -9,17 +9,17 @@
 import Foundation
 
 protocol PostRepositoryProtocol {
-    var apiClient: APIClientProtocol { get }
-    init(apiClient: APIClientProtocol)
+    var apiClient: DataClientProtocol { get }
+    init(apiClient: DataClientProtocol)
     
     func posts(completion: @escaping PostsResult)
 }
 
 class PostRepository: PostRepositoryProtocol {
     
-    let apiClient: APIClientProtocol
+    let apiClient: DataClientProtocol
     
-    required init(apiClient: APIClientProtocol) {
+    required init(apiClient: DataClientProtocol) {
         self.apiClient = apiClient
     }
     

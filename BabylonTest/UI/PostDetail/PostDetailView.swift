@@ -16,11 +16,11 @@ struct PostDetail {
 
 class PostDetailView: UIView {
     
-    let user: User
-    let body: String
-    let numberOfComments: Int
+    private let user: User
+    private let body: String
+    private let numberOfComments: Int
     
-    lazy var containerStackView: UIStackView = {
+    private lazy var containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -31,7 +31,7 @@ class PostDetailView: UIView {
         return stackView
     }()
     
-    lazy var authorNameLabel: UILabel = {
+    private lazy var authorNameLabel: UILabel = {
         let label = UILabel()
         let attributedString = NSMutableAttributedString(string: "Author Name: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
         attributedString.append(NSAttributedString(string: user.name))
@@ -39,7 +39,7 @@ class PostDetailView: UIView {
         return label
     }()
     
-    lazy var postDescriptionLabel: UILabel = {
+    private lazy var postDescriptionLabel: UILabel = {
         let label = UILabel()
         let attributedString = NSMutableAttributedString(string: "Description: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
         attributedString.append(NSAttributedString(string: body))
@@ -48,7 +48,7 @@ class PostDetailView: UIView {
         return label
     }()
     
-    lazy var numberOfCommentsLabel: UILabel = {
+    private lazy var numberOfCommentsLabel: UILabel = {
         let label = UILabel()
         let attributedString = NSMutableAttributedString(string: "Number of comments: ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .bold)])
         attributedString.append(NSAttributedString(string: "\(numberOfComments)"))

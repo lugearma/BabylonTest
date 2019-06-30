@@ -11,7 +11,6 @@ import Foundation
 struct Address: Decodable {
     let street: String
     let suite: String
-    // TODO: This could be an enum. (lam)
     let city: String
     let coordinates: (Double, Double)
     

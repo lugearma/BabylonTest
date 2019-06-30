@@ -9,17 +9,17 @@
 import Foundation
 
 protocol CommentRespositoryProtocol {
-    var apiClient: APIClientProtocol { get set }
-    init(apiClient: APIClientProtocol)
+    var apiClient: DataClientProtocol { get set }
+    init(apiClient: DataClientProtocol)
     
     func commentsBy(postId: Int, completion: @escaping CommentsResult)
 }
 
 class CommentRepository: CommentRespositoryProtocol {
     
-    var apiClient: APIClientProtocol
+    var apiClient: DataClientProtocol
     
-    required init(apiClient: APIClientProtocol) {
+    required init(apiClient: DataClientProtocol) {
         self.apiClient = apiClient
     }
     

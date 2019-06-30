@@ -17,25 +17,41 @@ enum APIRouter {
 
 extension APIRouter {
     
-    var baseURL: String {
-        return "http://jsonplaceholder.typicode.com"
+    private var baseComponents: URLComponents {
+        var components = URLComponents()
+        components.scheme = "http"
+        components.host = "jsonplaceholder.typicode.com"
+        return components
     }
     
     private var path: String {
         switch self {
         case .posts:
-            return "/posts"
+            return "posts"
         case .userBy(let id):
-            return "/users/\(id)"
+            return "users/\(id)"
+        case .commentsBy:
+            return "comments"
+        }
+    }
+    
+    private var components: URLComponents {
+        switch self {
+        case .posts:
+            return baseComponents
+        case .userBy:
+            return baseComponents
         case .commentsBy(let postId):
-            return "/comments?postId=\(postId)"
+            var mutableBaseComponents = baseComponents
+            mutableBaseComponents.queryItems = [URLQueryItem(name: "postId", value: postId)]
+            return mutableBaseComponents
         }
     }
     
     var composedURL: URL {
-        guard let url = URL(string: baseURL + self.path) else {
-            preconditionFailure("Unable to make URL")
+        guard let url = components.url else {
+            preconditionFailure("Couldn't get the URL")
         }
-        return url
+        return url.appendingPathComponent(path)
     }
 }

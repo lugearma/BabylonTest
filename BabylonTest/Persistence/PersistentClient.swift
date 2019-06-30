@@ -12,18 +12,9 @@ import CoreData
 enum PersistentClientError: Error {
     case dataNotFound
     case unableToFetchData
-    
-    var localizedDescription: String {
-        switch self {
-        case .dataNotFound:
-            return "Data not found."
-        case .unableToFetchData:
-            return "Something went wrong, unable to fetch data."
-        }
-    }
 }
 
-protocol PersistentClientProtocol: APIClientProtocol {
+protocol PersistentClientProtocol: DataClientProtocol {
     func savePosts(_ posts: [Post])
     func saveUser(_ user: User)
     func saveComments(_ comments: [Comment])
@@ -31,7 +22,7 @@ protocol PersistentClientProtocol: APIClientProtocol {
 
 class PersistentClient: PersistentClientProtocol {
     
-    let persistentManager: PersistentManagerProtocol
+    private let persistentManager: PersistentManagerProtocol
     
     init(persistentManager: PersistentManagerProtocol) {
         self.persistentManager = persistentManager
@@ -44,7 +35,6 @@ class PersistentClient: PersistentClientProtocol {
         let data = persistentManager.fetchData(request: request)
         switch data {
         case .success(let managedPosts):
-            // TODO: Refactor this.
             let posts = managedPosts.map { Post(userId: Int($0.userId), id: Int($0.id), title: $0.title ?? "", body: $0.body ?? "") }
             completion(.success(posts))
         case .failure:

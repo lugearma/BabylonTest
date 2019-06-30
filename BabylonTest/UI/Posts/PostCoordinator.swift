@@ -17,7 +17,7 @@ protocol PostsCoordinatorDelegate: AnyObject {
 
 class PostsCoordinator: CoordinatorProtocol {
     
-    private var apiClient: APIClientProtocol
+    private var apiClient: DataClientProtocol
     private var navigationController: UINavigationController
     private var postRespository: PostRepositoryProtocol
     private var persistentClient: PersistentClientProtocol
@@ -25,9 +25,9 @@ class PostsCoordinator: CoordinatorProtocol {
     private lazy var postsController: PostsViewController = configureController()
     
     weak var delegate: PostsCoordinatorDelegate?
-    var coordinators: [PostsFlow : CoordinatorProtocol] = [:]
+    private var coordinators: [PostsFlow : CoordinatorProtocol] = [:]
     
-    init(navigationController: UINavigationController, apiClient: APIClientProtocol, persistentClient: PersistentClientProtocol) {
+    init(navigationController: UINavigationController, apiClient: DataClientProtocol, persistentClient: PersistentClientProtocol) {
         self.navigationController = navigationController
         self.apiClient = apiClient
         self.postRespository = PostRepository(apiClient: apiClient)
@@ -54,7 +54,7 @@ extension PostsCoordinator: PostsViewModelCoodinatorDelegate {
         showPostDetail(post: post)
     }
     
-    func showPostDetail(post: Post) {
+    private func showPostDetail(post: Post) {
         let coordinator = PostDetailCoordinator(navigationController: navigationController, apiClient: apiClient, persistentClient: persistentClient, post: post)
         coordinators[.postDetail] = coordinator
         coordinator.start()

@@ -77,12 +77,12 @@
 		923AEC0122BFB80D0040E7F2 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		923AEC0422BFBDE30040E7F2 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		923AEC0822BFC5650040E7F2 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
-		92468BFC22C7A2FE00A3AE74 /* ManagedUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ManagedUser+CoreDataClass.swift"; path = "BabylonTest/ManagedUser+CoreDataClass.swift"; sourceTree = "<group>"; };
-		92468BFD22C7A2FE00A3AE74 /* ManagedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ManagedUser+CoreDataProperties.swift"; path = "BabylonTest/ManagedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		92468BFE22C7A2FE00A3AE74 /* ManagedPost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ManagedPost+CoreDataClass.swift"; path = "BabylonTest/ManagedPost+CoreDataClass.swift"; sourceTree = "<group>"; };
-		92468BFF22C7A2FE00A3AE74 /* ManagedPost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ManagedPost+CoreDataProperties.swift"; path = "BabylonTest/ManagedPost+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		92468C0822C7E2C700A3AE74 /* ManagedComment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ManagedComment+CoreDataClass.swift"; path = "BabylonTest/ManagedComment+CoreDataClass.swift"; sourceTree = "<group>"; };
-		92468C0922C7E2C700A3AE74 /* ManagedComment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ManagedComment+CoreDataProperties.swift"; path = "BabylonTest/ManagedComment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		92468BFC22C7A2FE00A3AE74 /* ManagedUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedUser+CoreDataClass.swift"; sourceTree = "<group>"; };
+		92468BFD22C7A2FE00A3AE74 /* ManagedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		92468BFE22C7A2FE00A3AE74 /* ManagedPost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedPost+CoreDataClass.swift"; sourceTree = "<group>"; };
+		92468BFF22C7A2FE00A3AE74 /* ManagedPost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedPost+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		92468C0822C7E2C700A3AE74 /* ManagedComment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedComment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		92468C0922C7E2C700A3AE74 /* ManagedComment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedComment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		929E93F422C94AE2005DE13E /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		92A0B2FC22C2A8A400E71FB9 /* PostRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepositoryTest.swift; sourceTree = "<group>"; };
 		92A0B2FF22C2AD4500E71FB9 /* UserRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTest.swift; sourceTree = "<group>"; };
@@ -128,12 +128,6 @@
 		9230B2B522B4BC1D00BDC7EC = {
 			isa = PBXGroup;
 			children = (
-				92468C0822C7E2C700A3AE74 /* ManagedComment+CoreDataClass.swift */,
-				92468C0922C7E2C700A3AE74 /* ManagedComment+CoreDataProperties.swift */,
-				92468BFC22C7A2FE00A3AE74 /* ManagedUser+CoreDataClass.swift */,
-				92468BFD22C7A2FE00A3AE74 /* ManagedUser+CoreDataProperties.swift */,
-				92468BFE22C7A2FE00A3AE74 /* ManagedPost+CoreDataClass.swift */,
-				92468BFF22C7A2FE00A3AE74 /* ManagedPost+CoreDataProperties.swift */,
 				9230B2C022B4BC1D00BDC7EC /* BabylonTest */,
 				9230B2D822B4BC1E00BDC7EC /* BabylonTestTests */,
 				9230B2BF22B4BC1D00BDC7EC /* Products */,
@@ -189,6 +183,7 @@
 		923AEBF622BEB8BF0040E7F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				929E93F622C97405005DE13E /* CoreData */,
 				923AEBF722BEB8D40040E7F2 /* Post.swift */,
 				923AEBF922BEB90C0040E7F2 /* User.swift */,
 				923AEBFB22BEB92D0040E7F2 /* Address.swift */,
@@ -214,6 +209,19 @@
 				929E93F422C94AE2005DE13E /* UIAlertController.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		929E93F622C97405005DE13E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				92468C0822C7E2C700A3AE74 /* ManagedComment+CoreDataClass.swift */,
+				92468C0922C7E2C700A3AE74 /* ManagedComment+CoreDataProperties.swift */,
+				92468BFC22C7A2FE00A3AE74 /* ManagedUser+CoreDataClass.swift */,
+				92468BFD22C7A2FE00A3AE74 /* ManagedUser+CoreDataProperties.swift */,
+				92468BFE22C7A2FE00A3AE74 /* ManagedPost+CoreDataClass.swift */,
+				92468BFF22C7A2FE00A3AE74 /* ManagedPost+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		92A0B30122C2B4B700E71FB9 /* Supporting */ = {

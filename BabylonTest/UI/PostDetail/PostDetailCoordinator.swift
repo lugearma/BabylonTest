@@ -14,10 +14,10 @@ class PostDetailCoordinator: CoordinatorProtocol {
     let userRepository: UserRepositoryProtocol
     let commentRepository: CommentRespositoryProtocol
     let persistentClient: PersistentClientProtocol
-    let apiClient: APIClientProtocol
+    let apiClient: DataClientProtocol
     let post: Post
     
-    init(navigationController: UINavigationController, apiClient: APIClientProtocol, persistentClient: PersistentClientProtocol, post: Post) {
+    init(navigationController: UINavigationController, apiClient: DataClientProtocol, persistentClient: PersistentClientProtocol, post: Post) {
         self.navigationController = navigationController
         self.apiClient = apiClient
         self.userRepository = UserRepository(apiClient: apiClient)

@@ -9,16 +9,16 @@
 import Foundation
 
 protocol UserRepositoryProtocol {
-    var apiClient: APIClientProtocol { get }
-    init(apiClient: APIClientProtocol)
+    var apiClient: DataClientProtocol { get }
+    init(apiClient: DataClientProtocol)
     
     func userBy(id: Int, completion: @escaping UserResult)
 }
 
 class UserRepository: UserRepositoryProtocol {
-    var apiClient: APIClientProtocol
+    var apiClient: DataClientProtocol
     
-    required init(apiClient: APIClientProtocol) {
+    required init(apiClient: DataClientProtocol) {
         self.apiClient = apiClient
     }
     
