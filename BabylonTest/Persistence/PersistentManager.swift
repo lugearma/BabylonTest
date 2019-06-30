@@ -21,8 +21,8 @@ protocol PersistentManagerProtocol {
 
 extension PersistentManagerProtocol {
     func commitChanges() {
+        guard persistentContainer.viewContext.hasChanges else { return }
         do {
-            guard persistentContainer.viewContext.hasChanges else { return }
             try persistentContainer.viewContext.save()
             print("✅ Saved")
         } catch {
