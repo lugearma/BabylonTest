@@ -10,9 +10,10 @@ import UIKit
 
 final class PostsViewController: UIViewController {
     
-    let viewModel: PostsViewModel
-    let postsTableView = UITableView()
-    var posts: [Post] = []
+    private let viewModel: PostsViewModel
+    private let postsTableView = UITableView()
+    private var posts: [Post] = []
+    private let refreshControl = UIRefreshControl()
     
     init(viewModel: PostsViewModel) {
         self.viewModel = viewModel
@@ -29,12 +30,14 @@ final class PostsViewController: UIViewController {
         viewModel.fetchPosts()
         setupTableView()
         title = "Posts"
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
     }
     
     private func setupTableView() {
         postsTableView.translatesAutoresizingMaskIntoConstraints = false
         postsTableView.rowHeight = UITableView.automaticDimension
         postsTableView.estimatedRowHeight = 100
+        postsTableView.refreshControl = refreshControl
         view.addSubview(postsTableView)
         
         NSLayoutConstraint.activate([
@@ -47,6 +50,11 @@ final class PostsViewController: UIViewController {
         postsTableView.delegate = self
         postsTableView.dataSource = self
         postsTableView.register(PostCell.self, forCellReuseIdentifier: PostCell.identifier)
+    }
+    
+    @objc func refreshData() {
+        viewModel.fetchPosts()
+        print(#function)
     }
 }
 
@@ -86,9 +94,11 @@ extension PostsViewController: PostsViewModelDelegate {
     func didReceivePosts(_ posts: [Post]) {
         self.posts = posts
         postsTableView.reloadSections([0], with: .automatic)
+        refreshControl.endRefreshing()
     }
     
     func didThrow(_ error: Error) {
-        print("🔥", error)
+        let alert = UIAlertController.basicErrorAlert(error: error)
+        present(alert, animated: true)
     }
 }

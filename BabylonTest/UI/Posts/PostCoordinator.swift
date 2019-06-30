@@ -22,6 +22,7 @@ class PostsCoordinator: CoordinatorProtocol {
     private var navigationController: UINavigationController
     private var postRespository: PostRepositoryProtocol
     private var persistentClient: PersistentClientProtocol
+    
     private lazy var postsController: PostsViewController = configureController()
     
     weak var delegate: PostsCoordinatorDelegate?

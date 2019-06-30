@@ -21,8 +21,8 @@ class PostDetailCoordinator: CoordinatorProtocol {
         self.navigationController = navigationController
         self.apiClient = apiClient
         self.userRepository = UserRepository(apiClient: apiClient)
-        self.persistentClient = persistentClient
         self.commentRepository = CommentRepository(apiClient: apiClient)
+        self.persistentClient = persistentClient
         self.post = post
     }
     

@@ -18,6 +18,15 @@ enum RequestType: String {
 enum APIClientError: Error {
     case missingData
     case noInternetConnection
+    
+    var localizedDescription: String {
+        switch self {
+        case .missingData:
+            return "Couldn't get data."
+        case .noInternetConnection:
+            return "No internet conection, verify you are connected to internet."
+        }
+    }
 }
 
 protocol APIClientProtocol {

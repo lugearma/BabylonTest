@@ -12,6 +12,15 @@ import CoreData
 enum PersistentClientError: Error {
     case dataNotFound
     case unableToFetchData
+    
+    var localizedDescription: String {
+        switch self {
+        case .dataNotFound:
+            return "Data not found."
+        case .unableToFetchData:
+            return "Something went wrong, unable to fetch data."
+        }
+    }
 }
 
 protocol PersistentClientProtocol: APIClientProtocol {

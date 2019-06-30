@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Coodinator {
+enum CoodinatorFlow {
     case posts
 }
 
@@ -22,7 +22,7 @@ final class AppCoordinator: CoordinatorProtocol {
     let apiClient: APIClientProtocol
     let persistentManager: PersistentManager
     let persistentClient: PersistentClientProtocol
-    var coordinators: [Coodinator : CoordinatorProtocol] = [:]
+    var coordinators: [CoodinatorFlow : CoordinatorProtocol] = [:]
     let navigationController = UINavigationController()
     
     init(window: UIWindow, apiClient: APIClientProtocol, persistentManager: PersistentManager) {

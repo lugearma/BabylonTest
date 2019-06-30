@@ -64,10 +64,9 @@ extension PostDetailViewController: PostDetailViewModelDelegate {
     }
     
     func didThrow(_ error: Error) {
-        if let _ = error as? PersistentClientError {
-            
-            // TODO: Present Alert.
+        let alert = UIAlertController.basicErrorAlert(error: error) { _ in
+            self.navigationController?.popViewController(animated: true)
         }
-        print("🔥", error)
+        present(alert, animated: true)
     }
 }
