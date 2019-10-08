@@ -31,6 +31,14 @@ final class PostsViewController: UIViewController {
         setupTableView()
         title = "Posts"
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
+        let segmentControl = UISegmentedControl()
+        
+        if #available(iOS 13.0, *) {
+            segmentControl.selectedSegmentTintColor = .green
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     private func setupTableView() {
